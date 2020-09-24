@@ -15,7 +15,7 @@ public class MyApp {
         String token = System.getenv("SLACK_TOKEN");
         App app = new App();
         BasicConfigurator.configure(); //log4j is what catches server messages, apparently the vanilla tutorial program doesn't have it set up
-        app.command("/ishan", (req, ctx) -> {
+        app.command("/ishan", (req, ctx) -> {//change the command to whatever works for you
             return ctx.ack("PENS PENCILS HOCKEYSTICK HANDLE BROOMSTICK HANDLE PEBBLES SMALL GLASS JAR");
         });
 
