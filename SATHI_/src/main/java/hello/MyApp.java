@@ -82,6 +82,22 @@ public class MyApp {
             return ctx.ack();
         });
 
+	app.command("/event", (req, ctx) -> {
+    //LocalDate myDate = LocalDate.now();
+    Date myDate = new Date();
+    SimpleDateFormat datePickerFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timePickerFormat = new SimpleDateFormat("HH:mm");
+    PlainTextObject value = new PlainTextObject(
+            "mrkdwn", false
+    );
+    List list = new ArrayList<BlockElement>();
+    list.add(datePicker(dP -> dP.actionId("button_action").initialDate(datePickerFormat.format(myDate))));
+    return ctx.ack(asBlocks(
+            section(section -> section.text(markdownText("Select a date and time for an event."))),
+            actions(actions -> actions.elements(list))
+    ));
+});
+
         //add "/slack/events" to the end of ever ngrok link you use so that the bot can tunnel properly
 
 
