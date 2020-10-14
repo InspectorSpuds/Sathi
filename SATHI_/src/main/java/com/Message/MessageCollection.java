@@ -2,8 +2,12 @@ package com.Message;
 
 import com.google.gson.Gson;
 import com.slack.api.model.view.View;
+import com.slack.api.util.json.GsonFactory;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+
 import static com.slack.api.model.block.Blocks.*;
 import static com.slack.api.model.block.composition.BlockCompositions.*;
 import static com.slack.api.model.block.element.BlockElements.*;
@@ -15,22 +19,30 @@ import static com.slack.api.model.view.Views.*;
    the main class.
 
    Note:
-   -I would recommend statically importing this, helps with abstraction
-   ie. you can write MODAL_VIEW instead of
-   MessageCollection.MODAL_VIEW Kind of a productivity booster imo
-   -Views are modal message archetypes in java
+   -I would recommend statically importing this, helps with abstraction and
+    this class ideally should never be instantiated if you're being mindful
+    of productivity
 
-   Internship sites commonly used:
-   -LinkedIn
-   -StackOverflow
-   -Indeed
+    static import: ie. you can write MODAL_VIEW instead of
+    MessageCollection.MODAL_VIEW Kind of a productivity booster imo
+    Views: modal message storage container for the Slack API
+    Modal: Focused mini-window in Slack that functions as primarily a form
+    submission method
+
+    Notes for the future:
+    Internship sites commonly used:
+    -LinkedIn
+    -StackOverflow
+    -Indeed
 * */
 public class MessageCollection {
     public static final View SCHEDULER_VIEW = buildSchedulerView();
-    //public static final View INTERNSHIP_SCRAPER_VIEW = buildInternshipCreatorView();
+    public static final View NOTIFICATION_MANAGER_VIEW = null;
+    public static final View INTERNSHIP_SCRAPER_VIEW = buildInternshipCreatorView();
     public static final View DELETE_ANNOUNCEMENT_VIEW = null;
 
-    private static View buildSchedulerView(){
+    private static View buildSchedulerView() {
+
         Date myDate = new Date();
         SimpleDateFormat datePickerFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timePickerFormat = new SimpleDateFormat("HH:mm");
@@ -40,7 +52,6 @@ public class MessageCollection {
                 .title(viewTitle(title -> title.type("plain_text").text("Create Event").emoji(true)))
                 .submit(viewSubmit(submit -> submit.type("plain_text").text("Create").emoji(true)))
                 .close(viewClose(close -> close.type("plain_text").text("Cancel").emoji(true)))
-                .privateMetadata("{\"response_url\":\"https://hooks.slack.com/actions/T1ABCD2E12/330361579271/0dAEyLY19ofpLwxqozy3firz\"}")
                 .blocks(asBlocks(
                         section(section -> section
                                 .blockId("Event-Selector")
@@ -65,12 +76,13 @@ public class MessageCollection {
                                 ))
                         ),
                         section(section -> section
-                                .blockId("Hour-Time")
+                                .blockId("Hour_Time")
                                 .text(markdownText("Select the Hour time"))
                                 .accessory(staticSelect(staticSelect -> staticSelect
                                         .actionId("Hour")
                                         .placeholder(plainText("Select the Hour time"))
                                         .options(asOptions(
+                                                option(plainText("0"),"0"),
                                                 option(plainText("1"),"1"),
                                                 option(plainText("2"),"2"),
                                                 option(plainText("3"),"3"),
@@ -93,8 +105,7 @@ public class MessageCollection {
                                                 option(plainText("20"),"20"),
                                                 option(plainText("21"),"21"),
                                                 option(plainText("22"),"22"),
-                                                option(plainText("23"),"23"),
-                                                option(plainText("24"),"24")
+                                                option(plainText("23"),"23")
                                         ))
                                 ))
                         ),
@@ -102,7 +113,7 @@ public class MessageCollection {
                                 .blockId("Minute-Time")
                                 .text(markdownText("Select Minute Time"))
                                 .accessory(staticSelect(staticSelect -> staticSelect
-                                        .actionId("Time")
+                                        .actionId("Minute")
                                         .placeholder(plainText("Select Minute Time"))
                                         .options(asOptions(
                                                 option(plainText("1"),"1"),
@@ -168,7 +179,7 @@ public class MessageCollection {
                                 ))
                         ),
                         input(input -> input
-                                .blockId("description")
+                                .blockId("Agenda_Block")
                                 .element(plainTextInput(pti -> pti.actionId("Agenda").multiline(true)))
                                 .label(plainText(pt -> pt.text("Detailed Agenda").emoji(true)))
                         )
@@ -177,14 +188,11 @@ public class MessageCollection {
         );
     }
 
+    private static View buildNotificationManagerView() {
+        return null;
+    }
+
     private static View buildInternshipCreatorView() {
         return null;
     }
 }
-/*
-
-
-
-
-
- */

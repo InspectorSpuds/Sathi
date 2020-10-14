@@ -1,4 +1,4 @@
-package com.Scraper;
+package com.Extractor;
 
 public class Extractor {
 
