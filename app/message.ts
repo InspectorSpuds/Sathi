@@ -1,9 +1,15 @@
+export enum EventType {
+    MEETING = 'meeting',
+    EVENT = 'event',
+    INTERNSHIP = 'internship'
+}
+
 export class CustomMessage {
-    eventType: string;
+    eventType: EventType;
     messageId: string;
     messageBody: string;
     postDate: string;
-    constructor(eventType: string, messageId: string, messageBody: string, postDate: string) {
+    constructor(eventType: EventType, messageId: string, messageBody: string, postDate: string) {
         this.eventType = eventType;
         this.messageId = messageId;
         this.messageBody = messageBody;
@@ -14,5 +20,15 @@ export class CustomMessage {
             + "On " + this.postDate + "\n" 
             + "What's happening: " + "\n"
             + this.messageBody;
+    }
+}
+
+export class AnnouncementManager {
+    announcements: Map<string, CustomMessage>;
+    userIds: Map<string, Set<string>>;
+
+    constructor() {
+        this.announcements = new Map();
+        this.userIds = new Map();
     }
 }
