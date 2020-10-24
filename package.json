@@ -1,0 +1,35 @@
+{
+  "name": "sathi",
+  "version": "0.0.1",
+  "description": "TS/JS refactor of a Slack bot originally written in Java, intended for use in scraping web pages to track internships in Washington",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only app/app.ts",
+    "prod": "tsc && node ./build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inspectorspuds/sathi.git"
+  },
+  "keywords": [
+    "slack",
+    "bot",
+    "java",
+    "javascript",
+    "typescript",
+    "washington",
+    "internships"
+  ],
+  "author": "Alex Wallen, Bhagyashree Aras, Ishan Parikh, Devon McKee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inspectorspuds/sathi/issues"
+  },
+  "homepage": "https://github.com/inspectorspuds/sathi#readme",
+  "dependencies": {
+    "@slack/web-api": "^5.13.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.0.3"
+  }
+}
