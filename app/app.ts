@@ -1,4 +1,5 @@
 import { WebClient, WebAPICallResult } from '@slack/web-api';
+import { CustomMessage } from './message'
 
 const token = process.env.SLACK_TOKEN;
 
@@ -12,4 +13,6 @@ interface ChatPostMessageResult extends WebAPICallResult {
     }
 }
 
-console.log("Test");
+const msg : CustomMessage = new CustomMessage("testEvent", "da92d90a2d90", "Test event body!", "02/10/2021");
+
+console.log(msg.toString());
