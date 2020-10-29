@@ -41,7 +41,7 @@ var app = new bolt_1.App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     token: process.env.SLACK_BOT_TOKEN,
 });
-app.command('/schedule', function (_a) {
+app.command('/sathi-schedule', function (_a) {
     var command = _a.command, ack = _a.ack, say = _a.say;
     return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_b) {
@@ -69,7 +69,7 @@ app.command('/schedule', function (_a) {
             case 1:
                 // Start the app
                 _a.sent();
-                console.log('⚡️ Bolt app is running!');
+                Console.log("App running!...");
                 return [2 /*return*/];
         }
     });
